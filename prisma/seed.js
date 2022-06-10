@@ -2,7 +2,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 async function seed() {
-  const createdUsers = await prisma.user.create({
+  const createdUser = await prisma.user.create({
     data: {
       username: 'alicemarti',
       email: 'alice@marti.com',
@@ -15,7 +15,24 @@ async function seed() {
     },
   });
 
-  console.log(`${createdUsers.count} users created`, createdUsers);
+  console.log(`${createdUser} users created`, createdUser);
+
+  const createdPosts = await prisma.post.create({
+    data: {
+      title: 'why does it rain',
+      content: 'it rains because its wet',
+      published: true,
+      picture:
+        'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+      user: {
+        connect: {
+          id: createdUser.id,
+        },
+      },
+    },
+  });
+
+  console.log(`${createdPosts.count} post created`, createdPosts);
 
   process.exit(0);
 }
