@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/boolean-uk/blog-domain-challenge-1#readme",
   "dependencies": {
+    "@mermaid-js/mermaid-cli": "^9.1.2",
     "@prisma/client": "^3.8.1",
     "prisma": "^3.8.1"
   }
