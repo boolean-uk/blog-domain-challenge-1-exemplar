@@ -17,7 +17,7 @@ async function seed() {
 
   console.log(`${createdUser} users created`, createdUser);
 
-  const createdPosts = await prisma.post.create({
+  const createdPost = await prisma.post.create({
     data: {
       title: 'why does it rain',
       content: 'it rains because its wet',
@@ -32,7 +32,20 @@ async function seed() {
     },
   });
 
-  console.log(`${createdPosts.count} post created`, createdPosts);
+  console.log(`${createdPost} post created`, createdPost);
+
+  const createdComment = await prisma.comment.create({
+    data: {
+      content: 'that is terribly interesting',
+      user: {
+        connect: {
+          id: createdUser.id,
+        },
+      },
+    },
+  });
+
+  console.log(`${createdComment} post created`, createdComment);
 
   process.exit(0);
 }
